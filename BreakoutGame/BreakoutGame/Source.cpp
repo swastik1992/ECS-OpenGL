@@ -6,6 +6,8 @@
 #include <GL\freeglut.h>
 #include <GLFW\glfw3.h>
 
+
+
 const GLuint SCREEN_WIDTH = 800;
 const GLuint SCREEN_HEIGHT = 600;
 
