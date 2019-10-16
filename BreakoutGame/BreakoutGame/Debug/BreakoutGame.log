@@ -1,5 +1,2 @@
-﻿  Source.cpp
-f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\source.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  TextRenderer.cpp
-  Generating Code...
+﻿  SystemContainers.cpp
   BreakoutGame.vcxproj -> F:\Swastik\Personal Git Projects\Breakout-ECS-OpenGL\BreakoutGame\Debug\BreakoutGame.exe

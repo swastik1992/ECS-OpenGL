@@ -2,10 +2,13 @@
 
 #include <string>
 #include <map>
+#include <vector>
+
+#include <GL/glew.h>
+
 #include "Texture2D.h"
 #include "Shader.h"
 
-#include <glad\glad.h>
 
 
 class AssetLoader
@@ -14,6 +17,8 @@ public:
 	// Resource storage
 	static std::map<std::string, Shader*>    Shaders;
 	static std::map<std::string, Texture2D*> Textures;
+	static std::map<std::string, std::vector<std::vector<GLuint>>> Levels;
+
 	// Loads (and generates) a shader program from file loading vertex, fragment (and geometry) shader's source code. If gShaderFile is not nullptr, it also loads a geometry shader
 	static Shader *   LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, const std::string & name);
 	// Retrieves a stored sader
@@ -22,6 +27,10 @@ public:
 	static Texture2D * LoadTexture(const GLchar *file, GLboolean alpha, const std::string & name);
 	// Retrieves a stored texture
 	static Texture2D * GetTexture(const std::string & name);
+	//Get Map.
+	static std::vector<std::vector<GLuint>> LoadLevel(const GLchar *file, GLfloat width, GLfloat height, const std::string& name);
+	static std::vector<std::vector<GLuint>> GetLevel(const std::string & name);
+
 	// Properly de-allocates all loaded resources
 	static void        Clear();
 private:

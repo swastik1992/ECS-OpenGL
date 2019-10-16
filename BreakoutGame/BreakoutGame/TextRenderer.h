@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 
-#include <glad/glad.h>
+#include <GL/glew.h>
 #include <glm/glm.hpp>
 
 #include "Texture2D.h"

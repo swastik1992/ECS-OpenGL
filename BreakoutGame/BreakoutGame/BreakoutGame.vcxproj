@@ -76,11 +76,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\freetype2\include;$(SolutionDir)..\Dependencies\glm\;$(SolutionDir)..\Dependencies\glad\include;$(SolutionDir)..\Dependencies\stb_image;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\include;$(SolutionDir)..\Dependencies\freeglut\include;$(SolutionDir)..\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\freetype2\include;$(SolutionDir)..\Dependencies\glm\;$(SolutionDir)..\Dependencies\stb_image;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\include;$(SolutionDir)..\Dependencies\freeglut\include;$(SolutionDir)..\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\freetype2\win32\;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2019;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2017;$(SolutionDir)..\Dependencies\freeglut\lib;$(SolutionDir)..\Dependencies\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;glfw3.lib;glfw3dll.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\glew-2.1.0\lib\Release\Win32;$(SolutionDir)..\Dependencies\freetype2\win32\;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2019;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2017;$(SolutionDir)..\Dependencies\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;freeglut.lib;glfw3.lib;glfw3dll.lib;freetype.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,13 +100,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\freetype2\include;$(SolutionDir)..\Dependencies\glm\;$(SolutionDir)..\Dependencies\glad\include;$(SolutionDir)..\Dependencies\stb_image;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\include;$(SolutionDir)..\Dependencies\freeglut\include;$(SolutionDir)..\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\freetype2\include;$(SolutionDir)..\Dependencies\glm\;$(SolutionDir)..\Dependencies\stb_image;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\include;$(SolutionDir)..\Dependencies\freeglut\include;$(SolutionDir)..\Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\freetype2\win32\;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2019;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2017;$(SolutionDir)..\Dependencies\freeglut\lib;$(SolutionDir)..\Dependencies\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;glfw3.lib;glfw3dll.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\glew-2.1.0\lib\Release\Win32;$(SolutionDir)..\Dependencies\freetype2\win32\;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2019;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2017;$(SolutionDir)..\Dependencies\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;freeglut.lib;glfw3.lib;glfw3dll.lib;freetype.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,21 +125,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Dependencies\glad\src\glad.c" />
     <ClCompile Include="..\..\Dependencies\stb_image\stb_image.cpp" />
     <ClCompile Include="AssetLoader.cpp" />
+    <ClCompile Include="BreakoutWorld.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="SystemContainers.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetLoader.h" />
+    <ClInclude Include="BreakoutWorld.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="Pool.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="SystemContainers.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BreakoutGame.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

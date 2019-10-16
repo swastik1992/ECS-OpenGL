@@ -1,11 +1,12 @@
 #include "AssetLoader.h"
-#include "stb_image.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include "stb_image.h"
 
 std::map<std::string, Texture2D*>    AssetLoader::Textures;
 std::map<std::string, Shader*>       AssetLoader::Shaders;
+std::map<std::string, std::vector<std::vector<GLuint>>>       AssetLoader::Levels;
 
 
 Shader * AssetLoader::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, const std::string & name)
@@ -108,4 +109,33 @@ Texture2D * AssetLoader::loadTextureFromFile(const GLchar *file, GLboolean alpha
 	// And finally free image data
 	stbi_image_free(image);
 	return texture;
+}
+
+std::vector<std::vector<GLuint>> AssetLoader::LoadLevel(const GLchar *file, GLfloat width, GLfloat height,const std::string& name )
+{
+	GLuint tileCode;
+	std::string line;
+	std::ifstream fstream(file);
+	std::vector<std::vector<GLuint>> tileData;
+
+	if (fstream)
+	{
+		while (std::getline(fstream, line))
+		{
+			std::istringstream sstream(line);
+			std::vector<GLuint> row;
+			while (sstream >> tileCode) // Read each word seperated by spaces
+				row.push_back(tileCode);
+			tileData.push_back(row);
+		}
+	}
+
+	Levels[name] = tileData;
+
+	return Levels[name];
+}
+
+std::vector<std::vector<GLuint>> AssetLoader::GetLevel(const std::string & name)
+{
+	return Levels[name];
 }
