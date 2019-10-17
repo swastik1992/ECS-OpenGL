@@ -7,6 +7,7 @@ World::World()
 	entityManager = std::make_unique<EntityManager>(*this);
 	systemManager = std::make_unique<SystemManager>(*this);
 	eventManager = std::make_unique<EventManager>(*this);
+	eventBus = std::make_unique<EventBus>();//todo
 }
 
 EntityManager& World::getEntityManager() const
@@ -27,6 +28,17 @@ EventManager& World::getEventManager() const
 	return *eventManager;
 }
 
+EventBus& World::getEventBus() const
+{
+	assert(eventBus != nullptr);
+	return *eventBus;
+}
+
+void World::Init()
+{
+	systemManager->Init();
+}
+
 void World::Update(float dt)
 {
 	for (auto e : createdEntities) {
@@ -42,7 +54,7 @@ void World::Update(float dt)
 	
 	systemManager->Update(dt);
 
-	getEventManager().destroyEvents();
+	//getEventManager().destroyEvents();
 
 
 }

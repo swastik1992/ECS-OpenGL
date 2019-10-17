@@ -16,6 +16,7 @@ class System
 public:
 	virtual ~System() {}
 
+	virtual void Init() {};
 	virtual void Update(float dt) {};
 	virtual void Render() {};
 	
@@ -76,6 +77,7 @@ public:
 	// removes an entity from interested systems' entity lists
 	void removeFromSystems(Entity e);
 
+	void Init();
 	void Update(float dt);
 	void Render();
 

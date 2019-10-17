@@ -1,6 +1,6 @@
 #include "BreakoutWorld.h"
 #include "AssetLoader.h"
-
+#include "EntityCollisionSystem.h"
 #include "TextRenderer.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -78,7 +78,7 @@ void BreakoutWorld::LoadLevels()
 
 void BreakoutWorld::Init()
 {
-	World::Init();
+	
 
 	LoadAssets();
 
@@ -92,7 +92,7 @@ void BreakoutWorld::Init()
 	auto player = createEntity();
 	player.tag("player");
 	player.addComponent<TransformComponent>(playerPosition);
-	player.addComponent<CollisionComponent>(PLAYER_SIZE);
+	player.addComponent<CollisionComponent>(PLAYER_SIZE, Box);
 	player.addComponent<MovementComponent>(glm::vec2(0, 0), PLAYER_VELOCITY);
 	player.addComponent<RenderingComponent>(glm::vec3(1), AssetLoader::GetTexture("player"), PLAYER_SIZE);
 	player.addComponent<InputComponent>();
@@ -103,19 +103,21 @@ void BreakoutWorld::Init()
 	//create ball.
 	auto ball = createEntity();
 	ball.tag("ball");
-	ball.addComponent<TransformComponent>(playerPosition + glm::vec2(PLAYER_SIZE.x/2 - BALL_RADIUS, -BALL_RADIUS *4.0));
-	ball.addComponent<CollisionComponent>(glm::vec2(25,25));//
-	ball.addComponent<MovementComponent>(INITIAL_BALL_VELOCITY, PLAYER_VELOCITY);//
+	ball.addComponent<TransformComponent>(playerPosition + glm::vec2(PLAYER_SIZE.x/2 - BALL_RADIUS, -BALL_RADIUS *2.250));
+	ball.addComponent<CollisionComponent>(BALL_RADIUS, Circle);//
+	ball.addComponent<MovementComponent>(INITIAL_BALL_VELOCITY, 1);//
 	ball.addComponent<RenderingComponent>(glm::vec3(1), AssetLoader::GetTexture("ball"), glm::vec2(25, 25));
 	ball.addComponent<BorderBounceComponent>();
 	
 
-	this->getSystemManager().addSystem<CollisionSystem>();
-	this->getSystemManager().addSystem<DamageSystem>();
+	this->getSystemManager().addSystem<EntityCollisionSystem>();
 	this->getSystemManager().addSystem<BorderBounceSystem>();
+	this->getSystemManager().addSystem<DamageSystem>();
 	this->getSystemManager().addSystem<MovementSystem>();
 	this->getSystemManager().addSystem<RenderingSystem>();
 	this->getSystemManager().addSystem<InputMovementSystem>();
+
+	World::Init();
 }
 
 void BreakoutWorld::Update(float dt)
@@ -131,6 +133,8 @@ void BreakoutWorld::Render()
 
 void BreakoutWorld::ProcessInputKeyDown(GLfloat dt)
 {
+	
+
 	/*if (this->gameState == Menu)
 	{
 		if (this->keys[GLFW_KEY_ENTER] && !this->keysProcessed[GLFW_KEY_ENTER])
@@ -165,4 +169,7 @@ void BreakoutWorld::ProcessInputKeyDown(GLfloat dt)
 void BreakoutWorld::ProcessInputKeyUp()
 {
 	getEventManager().emitEvent<InputEvent>(KeyUp);
+
+	getEventBus().Publish(new InputEvent_H(KeyUp));
+
 }

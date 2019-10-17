@@ -1,2 +1,16 @@
-﻿  SystemContainers.cpp
+﻿  BreakoutWorld.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\breakoutworld.cpp(54): warning C4018: '<': signed/unsigned mismatch
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\breakoutworld.cpp(56): warning C4018: '<': signed/unsigned mismatch
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\entity.h(225): warning C4244: 'argument': conversion from '_Ty' to 'GLfloat', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+  f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\entity.h(185): note: see reference to function template instantiation 'void EntityManager::addComponent<T,const glm::vec2&,_Ty>(Entity,const glm::vec2 &,_Ty &&)' being compiled
+          with
+          [
+              T=MovementComponent,
+              _Ty=int
+          ]
+  f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\breakoutworld.cpp(108): note: see reference to function template instantiation 'void Entity::addComponent<MovementComponent,const glm::vec2&,int>(const glm::vec2 &,int &&)' being compiled
   BreakoutGame.vcxproj -> F:\Swastik\Personal Git Projects\Breakout-ECS-OpenGL\BreakoutGame\Debug\BreakoutGame.exe

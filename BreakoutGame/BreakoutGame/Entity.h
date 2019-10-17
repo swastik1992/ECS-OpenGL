@@ -56,6 +56,8 @@ public:
 	*/
 	bool isAlive() const;
 
+	bool IsValid() const;
+
 	/*
 		Component management.
 	*/

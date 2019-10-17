@@ -41,11 +41,6 @@ MovementSystem::MovementSystem()
 
 void MovementSystem::Update(float dt)
 {
-	//auto collisionEvents = getWorld().getEventManager().getEvents<CollisionEvent>();
-	/*for (auto event : collisionEvents) 
-	{
-	};*/
-
 	for (auto e : getEntities())
 	{
 		auto &transformComp = e.getComponent<TransformComponent>();
@@ -64,6 +59,12 @@ InputMovementSystem::InputMovementSystem()
 	requireComponent<MovementComponent>();
 	requireComponent<CollisionComponent>();
 	requireComponent<InputComponent>();
+
+}
+
+void InputMovementSystem::Init()
+{
+	getWorld().getEventBus().Subscribe(this, &InputMovementSystem::OnInputEvent);
 }
 
 void InputMovementSystem::Update(float dt)
@@ -111,63 +112,18 @@ void InputMovementSystem::Update(float dt)
 	}
 }
 
+void InputMovementSystem::OnInputEvent(InputEvent_H* event)
+{
+	if (event->input == KeyUp)
+		std::cout << "Key is up." << std::endl;
+	else if(event->input == KeyDown)
+		std::cout << "Key is down." << std::endl;
+
+}
+
 //===========//
 
-CollisionSystem::CollisionSystem()
-{
-	requireComponent<TransformComponent>();
-	requireComponent<CollisionComponent>();
-}
 
-void CollisionSystem::Update(float dt)
-{
-	std::vector<Entity> movableEntities;
-
-	for (auto e : getEntities())
-	{
-		if (e.isAlive())
-		{
-			if (e.hasComponent<MovementComponent>())
-				movableEntities.push_back(e);
-		}
-	}
-
-	for (auto e : getEntities())
-	{
-		for(auto me : movableEntities)
-		{
-			if (me == e) continue;
-
-			if (e.isAlive() && me.isAlive())
-			{
-				if (CheckCollision(e, me) == GL_TRUE)
-				{
-					getWorld().getEventManager().emitEvent<CollisionEvent>(e, me);
-				}
-			}
-		}
-		
-	}
-	movableEntities.clear();
-}
-
-GLboolean CollisionSystem::CheckCollision(Entity& a, Entity& b)
-{
-	auto transformCompA = a.getComponent<TransformComponent>();
-	auto collisionCompA = a.getComponent<CollisionComponent>();
-	
-	auto transformCompB = b.getComponent<TransformComponent>();
-	auto collisionCompB  = b.getComponent<CollisionComponent>();
-
-	// Collision x-axis?
-	bool collisionX = transformCompA.position.x + collisionCompA.size.x >= transformCompB.position.x &&
-		transformCompB.position.x + collisionCompB.size.x >= transformCompA.position.x;
-	// Collision y-axis?
-	bool collisionY = transformCompA.position.y + collisionCompA.size.y >= transformCompB.position.y &&
-		transformCompB.position.y + collisionCompB.size.y >= transformCompA.position.y;
-	// Collision only if on both axes
-	return collisionX && collisionY;
-}
 
 //===========//
 
@@ -181,6 +137,27 @@ BorderBounceSystem::BorderBounceSystem()
 
 void BorderBounceSystem::Update(float dt)
 {
+	//auto collisionEvents = getWorld().getEventManager().getEvents<CollisionEvent>();
+	//for (auto event : collisionEvents)
+	//{
+	//	if (event.b.IsValid())
+	//	{
+	//		//std::cout << "yoyo" << getWorld().getEntityManager().tag event. . toString() << std::endl;
+
+	//		if (getWorld().getEntityManager().hasComponent<BorderBounceComponent>(event.b))
+	//		{
+	//			if (getWorld().getEntityManager().hasComponent<MovementComponent>(event.b))
+	//			{
+	//				auto &transformComp = event.b.getComponent<TransformComponent>();
+	//				auto &movementComp = event.b.getComponent<MovementComponent>();
+	//				movementComp.velocity *= -event.hitNormal;
+	//				//transformComp.position = event.diff;
+	//			}
+
+	//		}
+	//	}
+	//};
+
 	BreakoutWorld* world = dynamic_cast<BreakoutWorld*>(&getWorld());
 	for (auto e : getEntities())
 	{
@@ -210,8 +187,7 @@ void BorderBounceSystem::Update(float dt)
 //===========//
 
 DamageSystem::DamageSystem()
-{
-}
+{}
 
 void DamageSystem::Update(float dt)
 {
@@ -220,29 +196,13 @@ void DamageSystem::Update(float dt)
 	{
 		if (getWorld().getEntityManager().hasComponent<DestructibleComponent>(e.a))
 		{
-			getWorld().getEntityManager().destroyEntity(e.a);
 			e.a.kill();
 		}
 
 		if (getWorld().getEntityManager().hasComponent<DestructibleComponent>(e.b))
 		{
-			getWorld().getEntityManager().destroyEntity(e.b);
+			e.b.kill();
 		}
-		//if (e.a.isAlive())
-		//{
-		//	if (e.a.hasComponent<DestructibleComponent>())
-		//	{
-		//		//e.a.kill();
-		//	}
-		//}
-
-		//if (e.b.isAlive())
-		//{
-		//	if (e.b.hasComponent<DestructibleComponent>())
-		//	{
-		//		//e.b.kill();
-		//	}
-		//}
 	}
 }
 

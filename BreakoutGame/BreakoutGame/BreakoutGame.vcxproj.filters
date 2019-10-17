@@ -31,6 +31,15 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{e2bdaae7-52e2-4c74-b3b0-6122beaaa261}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Systems">
+      <UniqueIdentifier>{d406245a-05a3-47db-8a66-4143a7236537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Systems">
+      <UniqueIdentifier>{bb64c66d-6756-4ce1-bcea-f4e98c13629a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Components">
+      <UniqueIdentifier>{53756511-5e00-4980-866d-680886fbcf22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -73,7 +82,10 @@
       <Filter>Source Files\ECS</Filter>
     </ClCompile>
     <ClCompile Include="SystemContainers.cpp">
-      <Filter>Source Files\Game</Filter>
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityCollisionSystem.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,14 +125,17 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SystemContainers.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Pool.h">
       <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCollisionSystem.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemContainers.h">
+      <Filter>Header Files\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,1 +1,5 @@
 BreakoutGame/.vs
+BreakoutGame/BreakoutGame/Debug
+*.pdb
+*.obj
+BreakoutGame/BreakoutGame/Debug/

@@ -14,6 +14,11 @@ bool Entity::isAlive() const
 	return getEntityManager().isEntityAlive(*this);
 }
 
+bool Entity::IsValid() const
+{
+	return (entityManager != nullptr);
+}
+
 void Entity::tag(std::string tag)
 {
 	getEntityManager().tagEntity(*this, tag);
@@ -106,7 +111,7 @@ void EntityManager::destroyEntity(Entity e)
 
 void EntityManager::killEntity(Entity e)
 {
-	//world.killEntity(e);
+	world.destroyEntity(e);
 }
 
 bool EntityManager::isEntityAlive(Entity e) const

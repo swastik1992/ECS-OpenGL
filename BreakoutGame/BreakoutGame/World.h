@@ -11,6 +11,13 @@
 #include <string>
 #include <memory>
 
+enum InputKey
+{
+	LeftDown,
+	RightDown,
+	KeyUp,
+	KeyDown
+};
 
 
 // The World manages the creation and destruction of entities so that entities.
@@ -24,7 +31,9 @@ public:
 	SystemManager& getSystemManager() const;
 	EventManager& getEventManager() const;
 
-	virtual void Init() {}
+	EventBus& getEventBus() const;
+
+	virtual void Init();
 	/*
 		Updates the systems so that created/deleted entities are removed from the systems' vectors of entities.
 		Updates the entity manager so that the version of a destructed entity's index is incremented.
@@ -50,5 +59,6 @@ private:
 	std::unique_ptr<EntityManager> entityManager = nullptr;
 	std::unique_ptr<SystemManager> systemManager = nullptr;
 	std::unique_ptr<EventManager> eventManager = nullptr;
+	std::unique_ptr<EventBus> eventBus = nullptr;
 };
 

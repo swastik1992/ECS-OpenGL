@@ -43,6 +43,18 @@ void SystemManager::removeFromSystems(Entity e)
 	}
 }
 
+void SystemManager::Init()
+{
+	std::unordered_map<std::type_index, std::shared_ptr<System>>::iterator it = systems.begin();
+
+	// Iterate over the map using iterator
+	while (it != systems.end())
+	{
+		it->second->Init();
+		it++;
+	}
+}
+
 void SystemManager::Update(float dt)
 {
 	std::unordered_map<std::type_index, std::shared_ptr<System>>::iterator it = systems.begin();

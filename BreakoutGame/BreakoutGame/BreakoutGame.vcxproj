@@ -130,6 +130,7 @@
     <ClCompile Include="BreakoutWorld.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityCollisionSystem.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityCollisionSystem.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Pool.h" />
     <ClInclude Include="resource.h" />
