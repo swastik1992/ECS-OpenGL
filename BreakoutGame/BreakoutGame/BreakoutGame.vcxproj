@@ -81,7 +81,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(SolutionDir)..\Dependencies\glew-2.1.0\lib\Release\Win32;$(SolutionDir)..\Dependencies\freetype2\win32\;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2019;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2017;$(SolutionDir)..\Dependencies\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;freeglut.lib;glfw3.lib;glfw3dll.lib;freetype.lib;OpenGL32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;glfw3.lib;glfw3dll.lib;freetype.lib;OpenGL32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,7 +107,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(SolutionDir)..\Dependencies\glew-2.1.0\lib\Release\Win32;$(SolutionDir)..\Dependencies\freetype2\win32\;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2019;$(SolutionDir)..\Dependencies\glfw-3.3.bin.WIN32\lib-vc2017;$(SolutionDir)..\Dependencies\freeglut\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;freeglut.lib;glfw3.lib;glfw3dll.lib;freetype.lib;OpenGL32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;glfw3.lib;glfw3dll.lib;freetype.lib;OpenGL32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
