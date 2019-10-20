@@ -28,7 +28,7 @@ public:
 	// Retrieves a stored texture
 	static Texture2D * GetTexture(const std::string & name);
 	//Get Map.
-	static std::vector<std::vector<GLuint>> LoadLevel(const GLchar *file, GLfloat width, GLfloat height, const std::string& name);
+	static std::vector<std::vector<GLuint>> LoadLevel(const GLchar *file, GLint width, GLint height, const std::string& name);
 	static std::vector<std::vector<GLuint>> GetLevel(const std::string & name);
 
 	// Properly de-allocates all loaded resources

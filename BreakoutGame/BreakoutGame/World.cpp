@@ -2,12 +2,12 @@
 #include <cassert>
 
 
-World::World()
+World::World(GLint _width, GLint _height)
+	:width(_width), height(_height)
 {
 	entityManager = std::make_unique<EntityManager>(*this);
 	systemManager = std::make_unique<SystemManager>(*this);
-	eventManager = std::make_unique<EventManager>(*this);
-	eventBus = std::make_unique<EventBus>();//todo
+	eventBus = std::make_unique<EventBus>();
 }
 
 EntityManager& World::getEntityManager() const
@@ -20,12 +20,6 @@ SystemManager& World::getSystemManager() const
 {
 	assert(systemManager != nullptr);
 	return *systemManager;
-}
-
-EventManager& World::getEventManager() const
-{
-	assert(eventManager != nullptr);
-	return *eventManager;
 }
 
 EventBus& World::getEventBus() const
@@ -53,9 +47,6 @@ void World::Update(float dt)
 	destroyedEntities.clear();
 	
 	systemManager->Update(dt);
-
-	//getEventManager().destroyEvents();
-
 
 }
 

@@ -10,35 +10,20 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "Utils.h"
 
-enum InputKey
-{
-	LeftDown,
-	RightDown,
-	KeyUp,
-	KeyDown
-};
-
-
-// The World manages the creation and destruction of entities so that entities.
 class World
 {
 public:
-	World();
+	World(GLint _width = 800, GLint _height = 600);
 	virtual ~World(){}
 
 	EntityManager& getEntityManager() const;
 	SystemManager& getSystemManager() const;
-	EventManager& getEventManager() const;
-
 	EventBus& getEventBus() const;
 
 	virtual void Init();
-	/*
-		Updates the systems so that created/deleted entities are removed from the systems' vectors of entities.
-		Updates the entity manager so that the version of a destructed entity's index is incremented.
-		Destroys all the events that were created during the last frame.
-	*/
+	
 	virtual void Update(float dt);
 
 	virtual void Render();
@@ -49,7 +34,9 @@ public:
 	Entity getEntity(std::string tag) const;
 	std::vector<Entity> getGroup(std::string group) const;
 
-private:
+	GLint height, width;
+
+protected:
 	// vector of entities that are awaiting creation
 	std::vector<Entity> createdEntities;
 
@@ -58,7 +45,6 @@ private:
 
 	std::unique_ptr<EntityManager> entityManager = nullptr;
 	std::unique_ptr<SystemManager> systemManager = nullptr;
-	std::unique_ptr<EventManager> eventManager = nullptr;
 	std::unique_ptr<EventBus> eventBus = nullptr;
 };
 

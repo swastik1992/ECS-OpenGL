@@ -111,7 +111,7 @@ Texture2D * AssetLoader::loadTextureFromFile(const GLchar *file, GLboolean alpha
 	return texture;
 }
 
-std::vector<std::vector<GLuint>> AssetLoader::LoadLevel(const GLchar *file, GLfloat width, GLfloat height,const std::string& name )
+std::vector<std::vector<GLuint>> AssetLoader::LoadLevel(const GLchar *file, GLint width, GLint height,const std::string& name )
 {
 	GLuint tileCode;
 	std::string line;

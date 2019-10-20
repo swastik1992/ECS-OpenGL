@@ -1,7 +1,5 @@
 #include "SystemContainers.h"
 #include "AssetLoader.h"
-
-
 SystemContainers::SystemContainers()
 {
 }
@@ -10,7 +8,7 @@ SystemContainers::~SystemContainers()
 {
 }
 
-//===========//
+//===== RenderingSystem System ======//
 
 RenderingSystem::RenderingSystem()
 {
@@ -22,36 +20,18 @@ void RenderingSystem::Render()
 {
 	for (auto e : getEntities())
 	{
-		auto renderingComp = e.getComponent<RenderingComponent>();
-		auto transformComp = e.getComponent<TransformComponent>();
+		if ((e.hasComponent<RenderingComponent>()) && (e.hasComponent<TransformComponent>()))
+		{
+			auto renderingComp = e.getComponent<RenderingComponent>();
+			auto transformComp = e.getComponent<TransformComponent>();
 
-		BreakoutWorld* world = dynamic_cast<BreakoutWorld*>(&getWorld());
-		world->GetSpriteRenderer()->DrawSprite( renderingComp.texture, transformComp.position, renderingComp.size, transformComp.rotation, renderingComp.color);
-
+			BreakoutWorld* world = dynamic_cast<BreakoutWorld*>(&getWorld());
+			world->GetSpriteRenderer()->DrawSprite(renderingComp.texture, transformComp.position, renderingComp.size, transformComp.rotation, renderingComp.color);
+		}
 	}
 }
 
-//===========//
-
-MovementSystem::MovementSystem()
-{
-	requireComponent<TransformComponent>();
-	requireComponent<MovementComponent>();
-}
-
-void MovementSystem::Update(float dt)
-{
-	for (auto e : getEntities())
-	{
-		auto &transformComp = e.getComponent<TransformComponent>();
-		auto movementComp = e.getComponent<MovementComponent>();
-
-		transformComp.position.x += movementComp.velocity.x *dt;
-		transformComp.position.y += movementComp.velocity.y *dt;
-	}
-}
-
-//===========//
+//===== InputMovementSystem System ======//
 
 InputMovementSystem::InputMovementSystem()
 {
@@ -67,12 +47,11 @@ void InputMovementSystem::Init()
 	getWorld().getEventBus().Subscribe(this, &InputMovementSystem::OnInputEvent);
 }
 
-void InputMovementSystem::Update(float dt)
+void InputMovementSystem::OnInputEvent(InputEvent* event)
 {
-	auto inputEvents = getWorld().getEventManager().getEvents<InputEvent>();
-	for (auto event : inputEvents)
+	if (event->inputAction == Down)
 	{
-		if (event.input == LeftDown)
+		if (event->key == GLFW_KEY_A || event->key == GLFW_KEY_LEFT)
 		{
 			for (auto e : getEntities())
 			{
@@ -84,9 +63,9 @@ void InputMovementSystem::Update(float dt)
 					movementComp.velocity.x = -(movementComp.speed);
 				}
 			}
-		
+
 		}
-		else if (event.input == RightDown)
+		else if (event->key == GLFW_KEY_D|| event->key == GLFW_KEY_RIGHT)
 		{
 			for (auto e : getEntities())
 			{
@@ -101,31 +80,21 @@ void InputMovementSystem::Update(float dt)
 				}
 			}
 		}
-		else if(event.input == KeyUp)
-		{
-			for (auto e : getEntities())
-			{
-				auto &movementComp = e.getComponent<MovementComponent>();
-				movementComp.velocity.x = 0;
-			}
-		}
+		
 	}
+	else
+	{
+		for (auto e : getEntities())
+		{
+			auto &movementComp = e.getComponent<MovementComponent>();
+			movementComp.velocity.x = 0;
+		}
+		
+	}
+
 }
 
-void InputMovementSystem::OnInputEvent(InputEvent_H* event)
-{
-	if (event->input == KeyUp)
-		std::cout << "Key is up." << std::endl;
-	else if(event->input == KeyDown)
-		std::cout << "Key is down." << std::endl;
-
-}
-
-//===========//
-
-
-
-//===========//
+//===== BorderBounceSystem System ======//
 
 BorderBounceSystem::BorderBounceSystem()
 {
@@ -137,30 +106,13 @@ BorderBounceSystem::BorderBounceSystem()
 
 void BorderBounceSystem::Update(float dt)
 {
-	//auto collisionEvents = getWorld().getEventManager().getEvents<CollisionEvent>();
-	//for (auto event : collisionEvents)
-	//{
-	//	if (event.b.IsValid())
-	//	{
-	//		//std::cout << "yoyo" << getWorld().getEntityManager().tag event. . toString() << std::endl;
-
-	//		if (getWorld().getEntityManager().hasComponent<BorderBounceComponent>(event.b))
-	//		{
-	//			if (getWorld().getEntityManager().hasComponent<MovementComponent>(event.b))
-	//			{
-	//				auto &transformComp = event.b.getComponent<TransformComponent>();
-	//				auto &movementComp = event.b.getComponent<MovementComponent>();
-	//				movementComp.velocity *= -event.hitNormal;
-	//				//transformComp.position = event.diff;
-	//			}
-
-	//		}
-	//	}
-	//};
-
 	BreakoutWorld* world = dynamic_cast<BreakoutWorld*>(&getWorld());
 	for (auto e : getEntities())
 	{
+		if (!e.hasComponent<TransformComponent>()) continue;
+		if (!e.hasComponent<MovementComponent>()) continue;
+		if (!e.hasComponent<CollisionComponent>()) continue;
+
 		auto &transformComp = e.getComponent<TransformComponent>();
 		auto &movementComp = e.getComponent<MovementComponent>();
 		auto collisionComp = e.getComponent<CollisionComponent>();
@@ -184,24 +136,89 @@ void BorderBounceSystem::Update(float dt)
 	}
 }
 
-//===========//
+//====== Damage System =====//
 
-DamageSystem::DamageSystem()
-{}
-
-void DamageSystem::Update(float dt)
+void DamageSystem::Init()
 {
-	auto collisionEvents = getWorld().getEventManager().getEvents<CollisionEvent>();
-	for (auto e : collisionEvents)
+	getWorld().getEventBus().Subscribe(this, &DamageSystem::OnCollisionEvent);
+}
+
+void DamageSystem::OnCollisionEvent(CollisionEvent* event)
+{
+	if (BreakoutWorld* world = static_cast<BreakoutWorld*>(&getWorld()))
 	{
-		if (getWorld().getEntityManager().hasComponent<DestructibleComponent>(e.a))
+		GLboolean bIsDestroyed = GL_FALSE;
+		if (getWorld().getEntityManager().hasComponent<DestructibleComponent>(event->a))
 		{
-			e.a.kill();
+			getWorld().getEventBus().Publish<DestroyEvent>(new DestroyEvent());
+			event->a.kill();
+			bIsDestroyed = GL_TRUE;
 		}
 
-		if (getWorld().getEntityManager().hasComponent<DestructibleComponent>(e.b))
+		if (getWorld().getEntityManager().hasComponent<DestructibleComponent>(event->b))
 		{
-			e.b.kill();
+			getWorld().getEventBus().Publish<DestroyEvent>(new DestroyEvent());
+			event->b.kill();
+			bIsDestroyed = GL_TRUE;
+		}
+
+		if (world->gameState == GameState::InGame)
+		{
+			if (bIsDestroyed)
+				world->GetSoundEngine()->play2D("Resource/audio/446100__justinvoke__bounce.wav", false);
+			else
+				world->GetSoundEngine()->play2D("Resource/audio/solid.wav", false);
+		}
+	}
+
+}
+
+//===== PostProcessingSystem System ======//
+
+void PostProcessingSystem::Init()
+{
+	BreakoutWorld* bWorld = static_cast<BreakoutWorld*>(&getWorld());
+	if (!bWorld) return;
+	pProcessing = bWorld->GetPostProcessing();
+	shakeTime = 0;
+
+	getWorld().getEventBus().Subscribe(this, &PostProcessingSystem::OnDestroyEvent);
+}
+
+void PostProcessingSystem::Update(float dt)
+{
+	if (!pProcessing) return;
+
+	if (shakeTime > 0)
+		shakeTime -= dt;
+	else
+		pProcessing->Shake = GL_FALSE;
+
+}
+
+void PostProcessingSystem::OnDestroyEvent(DestroyEvent* event)
+{
+	if(!pProcessing) return;
+	
+	pProcessing->Shake = GL_TRUE;
+	shakeTime = 0.05f;
+}
+
+//===== GamsStateSystem System ======//
+
+GamsStateSystem::GamsStateSystem()
+{
+	requireComponent<DestructibleComponent>();
+}
+
+void GamsStateSystem::Update(float dt)
+{
+	if (getEntities().size() <= 0)
+	{
+		if (BreakoutWorld* world = static_cast<BreakoutWorld*>(&getWorld()))
+		{
+			if (world->gameState == GameState::InGame)
+				world->getEventBus().Publish< LevelEnd>(new LevelEnd());
 		}
 	}
 }

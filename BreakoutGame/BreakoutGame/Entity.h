@@ -22,7 +22,7 @@ public:
 	using Version = uint8_t;
 
 	/*
-		Id = index + version (kinda).
+		Id = index + version.
 	*/
 	Entity(Id index = 0, Version version = 0) { id = (version << IndexBits) | index; }
 
@@ -92,7 +92,7 @@ private:
 	static const uint32_t VersionBits = VERSION_BITS;
 	static const uint32_t VersionMask = (1 << VersionBits) - 1;
 
-	// Id = index + version (kinda).
+	// Id = index + version.
 	Id id;
 
 	EntityManager *entityManager = nullptr;
