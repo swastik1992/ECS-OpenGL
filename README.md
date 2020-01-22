@@ -31,18 +31,18 @@ Components are the actual data that any entity will use. It could be just a sing
 
 Since compiler would create a new type of struct for each template type, getId function would return an incremental unique number for each component type.
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/component.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/component.PNG)
 
 Also, by default we have a max number of component types and I also have a bitset of the same size. 
 ### System
 Systems are the functional implementation and are the last piece of ECS. System would usually have a set of components that they require and if an entity has all those components, system will add that entity into a list and will run the implementation for those entities. 
 Any basic system would require an array of entity that it is interested in, functions to add or remove any entity from it and most importantly a function to set all the required component for the system. 
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/system.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/system.PNG)
 
 We would also need a system manager to keep a list of all the systems and a way to add or remove systems from the world. 
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/system-manager.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/system-manager.PNG)
 
 ### Event
 The last thing we need in this entire ecs system for now is a way for different systems to communicate with each other, send one off messages or bind to a particular event and receive callbacks.
@@ -50,19 +50,19 @@ I have decided to go with a publish/Subscribe (known as Pub|Sub) event manager.
 
 The way it works is that we would create an Event, which will contain any event related variables like CollisionEvent would have collision directions, normals etc.
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/event.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/event.PNG)
 
  Next step is to subscribe to this event in any system by creating a function in that system that takes the event as a parameter. 
  
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/event-subscribe.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/event-subscribe.PNG)
 
 This function would be called any time the event gets published.
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/damage-event.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/damage-event.PNG)
 
 Last step is to publish the event wherever it is necessary. We would create a new object of the event, fill up with the required data and publish it. 
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/event-publish.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/event-publish.PNG)
  
 ### Step for creating an entity
 * Create all the required components if it doesn’t already exist. Eg: TransformComponent, CollisionComponent, RenderingComponent etc.
@@ -72,7 +72,7 @@ Last step is to publish the event wherever it is necessary. We would create a ne
 * Add the system if it hasn’t already added. Each system only needs to be added once to the world.
 * You can also turn on or off any system to debug or test functionalities. 
 
-![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/master/Images/step-demo.PNG)
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/step-demo.PNG)
 
 
 Game Demo
