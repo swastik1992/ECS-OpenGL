@@ -1,0 +1,31 @@
+﻿  stb_image.cpp
+  AssetLoader.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\assetloader.h(7): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  BreakoutWorld.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  Component.cpp
+  Entity.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  EntityCollisionSystem.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  MovementSystem.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  PostProcessing.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\postprocessing.h(2): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  Shader.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\shader.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  Source.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\source.cpp(4): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
+  SpriteRenderer.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\spriterenderer.h(2): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  System.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  SystemContainers.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  TextRenderer.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\textrenderer.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  Texture2D.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\texture2d.h(2): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  World.cpp
+f:\swastik\personal git projects\breakout-ecs-opengl\breakoutgame\breakoutgame\utils.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  Generating Code...

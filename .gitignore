@@ -1,6 +1,6 @@
-ECS-Demo/.vs
-ECS-Demo/Debug
-ECS-Demo/ECS-Demo/Debug
+BreakoutGame/.vs
+BreakoutGame/Debug
+BreakoutGame/BreakoutGame/Debug
 *.pdb
 *.obj
-ECS-Demo/ECS-Demo/Debug/
+BreakoutGame/BreakoutGame/Debug/
