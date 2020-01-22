@@ -74,7 +74,5 @@ Last step is to publish the event wherever it is necessary. We would create a ne
 
 ![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/step-demo.PNG)
 
-
-Game Demo
-Gif of game.
-IMAGE
+#### Game Demo
+![Screen Capture](https://github.com/swastik1992/Breakout-ECS-OpenGL/blob/master/Images/breakout-demo.gif)
