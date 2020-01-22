@@ -15,23 +15,23 @@ As the name suggests, ECS consist of entities which are usually some unique ids,
 In order to make ECS as friendly as possible, we would have to architect our system in a way so the user doesn’t feel that the implementation is too different from a typical OOP systems. For example, an entity in ECS is just a unique number to efficiently keep track of every object but to add a component/data to the created entity, we would have to somehow map the entity id to the component object. 
 To make this simple, we can add all the utility functions like adding/removing a component, giving entity a tag or group, finding if the entity has a particular component etc. in the Entity class itself. 
 
-![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/entity.png?token=AIDBJXYN5HCFU4KIOQUSEA26FAR5O)
+![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/entity.png)
 
 We would also need a manager to hold an array of entities as well as all the components that have been added for each entity. 
 EntityManager would have many utility functions to create/destroy/get entity, add/remove/get component from/to an entity, functionalities for grouping and tagging entities etc. 
 
-![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/entitymanager.PNG?token=AIDBJXYIYBK4FVQRXGB3JM26FASHW)
+![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/entitymanager.PNG)
 
 Entity class would also hold a pointer to EntityManager class so it can implement all the utility functions using entity manager’s utility functions.
 
-![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/entitymanager-pointer.png?token=AIDBJX4VEYTG7N5HG2X5NNC6FASK6)
+![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/entitymanager-pointer.png)
 
 ### Component
 Components are the actual data that any entity will use. It could be just a single data or collection of variables that would be used together by a system. Since we want to keep our same type data together in a continuous memory ie. every object of “X” component would be stored together in the memory using a fixed size pool. It also means that we can assign unique ids to these component type and use it as an index to keep all the same type of components.
 
 Since compiler would create a new type of struct for each template type, getId function would return an incremental unique number for each component type.
 
-![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/component.PNG?token=AIDBJXYH5WVRSYGRKT2ZMW26FASSU)
+![Screen Capture](https://raw.githubusercontent.com/swastik1992/Breakout-ECS-OpenGL/master/Images/component.PNG)
 
 Also, by default we have a max number of component types and I also have a bitset of the same size. 
 ### System
